@@ -84,8 +84,8 @@ public class TemperatureSeriesAnalysis {
         checkEmpty();
         double currentClosest = temperatureSeries[0];
         for (double temp: temperatureSeries) {
-            if (Math.abs(temp - tempValue) <=
-                    (Math.abs(currentClosest - tempValue))) {
+            if (Math.abs(temp - tempValue)
+                    <= (Math.abs(currentClosest - tempValue))) {
                 if (Math.abs(currentClosest) == Math.abs(temp)) {
                     currentClosest = Math.max(currentClosest, temp);
                 }
