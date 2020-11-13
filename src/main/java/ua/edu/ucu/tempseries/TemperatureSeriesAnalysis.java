@@ -27,7 +27,7 @@ public class TemperatureSeriesAnalysis {
 
     private void checkInputMismatch() {
         for (double temp: temperatureSeries) {
-            if (temp < MIN_VAL){
+            if (temp < MIN_VAL) {
                 throw new InputMismatchException();
             }
         }
@@ -59,7 +59,7 @@ public class TemperatureSeriesAnalysis {
         checkEmpty();
         double minTemp = temperatureSeries[0];
         for (double temp: temperatureSeries) {
-            if (temp < minTemp){
+            if (temp < minTemp) {
                 minTemp = temp;
             }
         }
@@ -70,7 +70,7 @@ public class TemperatureSeriesAnalysis {
         checkEmpty();
         double maxTemp = temperatureSeries[0];
         for (double temp: temperatureSeries) {
-            if (temp > maxTemp){
+            if (temp > maxTemp) {
                 maxTemp = temp;
             }
         }
@@ -105,12 +105,12 @@ public class TemperatureSeriesAnalysis {
         for (double temp: temperatureSeries) {
             if (sign.equals(">")) {
                 if (temp > tempValue) {
-                    counter ++;
+                    counter++;
                 }
             }
             else if (sign.equals("<")) {
                 if (temp < tempValue) {
-                    counter ++;
+                    counter++;
                 }
             }
         }
