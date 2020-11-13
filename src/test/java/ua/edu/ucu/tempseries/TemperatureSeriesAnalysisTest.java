@@ -117,20 +117,20 @@ public class TemperatureSeriesAnalysisTest {
         emptyArray.findTempClosestToValue(13);
     }
 
-
-
-
-
     @Test
     public void testAverage() {
         double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0};
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
         double expResult = 1.0;
-
         double actualResult = seriesAnalysis.average();
-        
         assertEquals(expResult, actualResult, 0.00001);        
     }
-    
+
+    @Test
+    public void testCommonArrayWithSummaryStatistics() {
+        String expResult = "0.0 2.7386127875258306 -4.0 4.0";
+        String actualResult = commonArray.summaryStatistics().toString();
+        assertEquals(expResult, actualResult);
+    }
 
 }

@@ -140,7 +140,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TempSummaryStatistics summaryStatistics() {
-        return null;
+        return new TempSummaryStatistics(this);
     }
 
     public double addTemps(double... temps) {
