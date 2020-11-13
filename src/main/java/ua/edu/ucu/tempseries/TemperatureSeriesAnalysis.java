@@ -20,13 +20,13 @@ public class TemperatureSeriesAnalysis {
     }
 
     private void checkEmpty() {
-        if (size == 0){
+        if (size == 0) {
             throw new IllegalArgumentException();
         }
     }
 
     private void checkInputMismatch() {
-        for (double temp: temperatureSeries){
+        for (double temp: temperatureSeries) {
             if (temp < MIN_VAL){
                 throw new InputMismatchException();
             }
@@ -34,7 +34,7 @@ public class TemperatureSeriesAnalysis {
     }
     private double tempsSum() {
         double sum = 0;
-        for (double temp: temperatureSeries){
+        for (double temp: temperatureSeries) {
             sum += temp;
         }
         return sum;
@@ -49,7 +49,7 @@ public class TemperatureSeriesAnalysis {
         double tempAverage = average();
         double sum = 0;
 
-        for (double temp: temperatureSeries){
+        for (double temp: temperatureSeries) {
             sum += (temp - tempAverage) * (temp - tempAverage);
         }
         return Math.sqrt(sum / size);
@@ -58,7 +58,7 @@ public class TemperatureSeriesAnalysis {
     public double min() {
         checkEmpty();
         double minTemp = temperatureSeries[0];
-        for (double temp: temperatureSeries){
+        for (double temp: temperatureSeries) {
             if (temp < minTemp){
                 minTemp = temp;
             }
@@ -69,7 +69,7 @@ public class TemperatureSeriesAnalysis {
     public double max() {
         checkEmpty();
         double maxTemp = temperatureSeries[0];
-        for (double temp: temperatureSeries){
+        for (double temp: temperatureSeries) {
             if (temp > maxTemp){
                 maxTemp = temp;
             }
@@ -83,10 +83,10 @@ public class TemperatureSeriesAnalysis {
 
     public double findTempClosestToValue(double tempValue) {
         checkEmpty();
-        double currentClosest = Math.abs(temperatureSeries[0] - tempValue);
-        for (double temp: temperatureSeries){
-            if (Math.abs(temp - tempValue) < currentClosest){
-                if (-currentClosest == temp){
+        double currentClosest = temperatureSeries[0];
+        for (double temp: temperatureSeries) {
+            if (Math.abs(temp - tempValue) < (Math.abs(currentClosest - tempValue))) {
+                if (-currentClosest == temp) {
                     currentClosest = Math.abs(temp);
                 }
                 else {
@@ -99,17 +99,31 @@ public class TemperatureSeriesAnalysis {
     }
 
     private double[] findTempsThen(double tempValue, String sign) {
-        double[] result = new double[size];
+
+        int counter = 0;
         int i = 0;
-        for (double temp: temperatureSeries){
+        for (double temp: temperatureSeries) {
             if (sign.equals(">")) {
-                if (temp > tempValue){
+                if (temp > tempValue) {
+                    counter ++;
+                }
+            }
+            else if (sign.equals("<")) {
+                if (temp < tempValue) {
+                    counter ++;
+                }
+            }
+        }
+        double[] result = new double[counter];
+        for (double temp: temperatureSeries) {
+            if (sign.equals(">")) {
+                if (temp > tempValue) {
                     result[i] = temp;
                     i++;
                 }
             }
             else if (sign.equals("<")) {
-                if (temp < tempValue){
+                if (temp < tempValue) {
                     result[i] = temp;
                     i++;
                 }
@@ -130,10 +144,10 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double addTemps(double... temps) {
-        if (temperatureSeries.length - size < temps.length){
+        if (temperatureSeries.length - size < temps.length) {
             double[] result = new double[temperatureSeries.length * 2];
-            for (int i = 0; i < temperatureSeries.length + temps.length; i++){
-                if (i < temperatureSeries.length){
+            for (int i = 0; i < temperatureSeries.length + temps.length; i++) {
+                if (i < temperatureSeries.length) {
                     result[i] = temperatureSeries[i];
                 }
                 else {
