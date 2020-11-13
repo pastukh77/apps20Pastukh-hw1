@@ -1,12 +1,11 @@
 package ua.edu.ucu.tempseries;
 
-import java.lang.IllegalArgumentException;
 import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
+    static final double MIN_VAL = -273;
     private double[] temperatureSeries;
     private int size;
-    static final double MIN_VAL = -273;
     public TemperatureSeriesAnalysis() {
         this.temperatureSeries = new double[1];
         size = 0;
@@ -85,7 +84,8 @@ public class TemperatureSeriesAnalysis {
         checkEmpty();
         double currentClosest = temperatureSeries[0];
         for (double temp: temperatureSeries) {
-            if (Math.abs(temp - tempValue) <= (Math.abs(currentClosest - tempValue))) {
+            if (Math.abs(temp - tempValue) <=
+                    (Math.abs(currentClosest - tempValue))) {
                 if (Math.abs(currentClosest) == Math.abs(temp)) {
                     currentClosest = Math.max(currentClosest, temp);
                 }
