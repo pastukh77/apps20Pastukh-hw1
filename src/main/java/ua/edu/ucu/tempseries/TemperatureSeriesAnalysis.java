@@ -6,7 +6,7 @@ import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
     private int size;
-    static final double magicNumber = -273;
+    static final double MIN_VAL = -273;
     public TemperatureSeriesAnalysis() {
         this.temperatureSeries = new double[1];
         size = 0;
@@ -19,20 +19,20 @@ public class TemperatureSeriesAnalysis {
         size = temperatureSeries.length;
     }
 
-    private void checkEmpty(){
+    private void checkEmpty() {
         if (size == 0){
             throw new IllegalArgumentException();
         }
     }
 
-    private void checkInputMismatch(){
+    private void checkInputMismatch() {
         for (double temp: temperatureSeries){
-            if (temp < magicNumber){
+            if (temp < MIN_VAL){
                 throw new InputMismatchException();
             }
         }
     }
-    private double tempsSum(){
+    private double tempsSum() {
         double sum = 0;
         for (double temp: temperatureSeries){
             sum += temp;
@@ -97,14 +97,8 @@ public class TemperatureSeriesAnalysis {
 
         return currentClosest;
     }
-    boolean isGrater(double val1, double val2){
-        if (val1 > val2){
-            return true;
-        }
-        else {return false;}
-    }
 
-    private double[] findTempsThen(double tempValue, String sign){
+    private double[] findTempsThen(double tempValue, String sign) {
         double[] result = new double[size];
         int i = 0;
         for (double temp: temperatureSeries){
