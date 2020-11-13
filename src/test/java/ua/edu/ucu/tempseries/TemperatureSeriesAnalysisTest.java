@@ -4,18 +4,16 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
 
+import java.util.InputMismatchException;
+
 public class TemperatureSeriesAnalysisTest {
     private TemperatureSeriesAnalysis emptyArray;
     private TemperatureSeriesAnalysis commonArray;
-    private TemperatureSeriesAnalysis longSeries;
-    private TemperatureSeriesAnalysis sameElementsSeries;
 
     @Before
     public void setUp() {
         emptyArray = new TemperatureSeriesAnalysis();
-        sameElementsSeries = new TemperatureSeriesAnalysis(new double[]{1.0, 1.0, 1.0, 1.0, 1.0});
-        commonArray = new TemperatureSeriesAnalysis(new double[]{1.0, 2.0, 3.0, 4.0, -1.0, -2.0, -3.0, -4.0});
-        longSeries = new TemperatureSeriesAnalysis(new double[]{2.0, 5.0, -1.0, 1.0, 5.0, -10.0});
+        commonArray = new TemperatureSeriesAnalysis(new double[]{-1.0, 1.0, 2.0, 3.0, 4.0, -2.0, -3.0, -4.0});
     }
 
     @Test
@@ -131,6 +129,25 @@ public class TemperatureSeriesAnalysisTest {
         String expResult = "0.0 2.7386127875258306 -4.0 4.0";
         String actualResult = commonArray.summaryStatistics().toString();
         assertEquals(expResult, actualResult);
+    }
+
+    @Test(expected = InputMismatchException.class)
+    public void testMissMatchWithAddTemps() {
+        commonArray.addTemps(-300.0);
+    }
+
+    @Test
+    public void testAddTempsWithEnoughPlace() {
+        commonArray.addTemps(1.0);
+        double expResult = 3.0;
+        double actualResult = commonArray.addTemps(2.0);
+        assertEquals(expResult, actualResult, 0.0001);
+    }
+    @Test
+    public void testSameModsFindClosestValue() {
+        double expResult = 1.0;
+        double actualResult = commonArray.findTempClosestToZero();
+        assertEquals(expResult, actualResult, 0.0001);
     }
 
 }
